@@ -1,5 +1,5 @@
 # ignore data folder but not the gitkeep files inside it and its children
-data/*
+data/**
 !data/.gitkeep
 !data/**/.gitkeep
 
