@@ -1,23 +1,6 @@
 # docker-compose.yml
 version: '3.9'
 
-# define volumes using local driver
-volumes:
-  hydra:
-    # uncomment if you want to use a local directory
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: /nfs/data-stack/hydradatabase
-    #   o: bind
-  dbeaver:
-    # uncomment if you want to use a local directory
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: /nfs/data-stack/cloudbeaver
-    #   o: bind
-
 services:
   hydra:
     container_name: hydra
@@ -39,3 +22,20 @@ services:
     volumes:
       - dbeaver:/opt/cloudbeaver/workspace
     restart: unless-stopped
+
+# define volumes
+volumes:
+  hydra:
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /nfs/data-stack/hydradatabase
+    #   o: bind
+  dbeaver:
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /nfs/data-stack/cloudbeaver
+    #   o: bind
