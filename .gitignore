@@ -1,3 +1,10 @@
+# ignore data folder but not the gitkeep files inside it and its children
+data/*
+!data/.gitkeep
+!data/**/.gitkeep
+
+
+
 .env
 commands.log
 docker-compose*.overrides.yml
