@@ -35,7 +35,6 @@ log_and_execute() {
     echo "Running command: $command"
     echo "$command" >>"$LOG_FILE"
     eval "$command"
-    refresh_screen
 }
 
 refresh_screen
@@ -103,6 +102,7 @@ if [[ -n "$user_exists" ]]; then
             get_password
             log_and_execute "docker exec hydra sh -c \"psql -U $root_user -d postgres -c \\\"ALTER USER $superuser_name WITH PASSWORD '$password';\\\"\""
             echo "Changed password for user $superuser_name to $password"
+            sleep 1.5
             break
         elif [[ $REPLY =~ ^[Nn]$ ]]; then
             break
@@ -114,6 +114,7 @@ else
     get_password
     log_and_execute "docker exec hydra sh -c \"psql -U $root_user -d postgres -c \\\"CREATE USER $superuser_name WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '$password';\\\"\""
     echo "Created user $superuser_name with password *********"
+    sleep 1.5
 fi
 
 note="Set up new database"
@@ -137,7 +138,6 @@ while true; do
         echo "Created database $database_name"
 
         note="Set up schemas for database $database_name"
-        refresh_screen
 
         # Prompt if they need to create a new schema, if so prompt for name and create it
         while true; do
@@ -147,6 +147,7 @@ while true; do
                 text_input "Enter a new schema name: " schema_name
                 log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d $database_name -c \\\"CREATE SCHEMA $schema_name;\\\"\""
                 echo "Created schema $schema_name"
+                sleep 1.5
             elif [[ $REPLY =~ ^[Nn]$ ]]; then
                 break
             else
@@ -203,6 +204,7 @@ while true; do
                     log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO $user_name;\\\"\""
                     log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO $user_name;\\\"\""
                     echo "Granted read only privileges to user $user_name on database $database"
+                    sleep 0.5
                 done
 
                 # Foreach rw_database_selections grant full access privileges to the new user
@@ -210,6 +212,7 @@ while true; do
                     log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"GRANT CONNECT ON DATABASE $database TO $user_name;\\\"\""
                     log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"GRANT ALL PRIVILEGES ON DATABASE $database TO $user_name;\\\"\""
                     echo "Granted full access privileges to user $user_name on database $database"
+                    sleep 0.5
                 done
 
                 break
