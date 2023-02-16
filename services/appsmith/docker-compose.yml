@@ -29,8 +29,8 @@ services:
 volumes:
   appsmith:
     # uncomment if you want to use a local directory
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   device: /nfs/data-stack/appsmith/stacks
-    #   o: bind
+    driver: local
+    driver_opts:
+      type: none
+      device: ../../data/appsmith/stacks
+      o: bind
