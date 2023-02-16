@@ -277,28 +277,33 @@ services:
 volumes:
   workspace:
     name: ${WORKSPACE_DOCKER_MOUNT}
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ../../data/airbyte/workspace
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: ../../data/airbyte/workspace
+
   # the data volume is only needed for backward compatibility; when users upgrade
   # from an old Airbyte version that relies on file-based configs, the server needs
   # to read this volume to copy their configs to the database
   data:
     name: ${DATA_DOCKER_MOUNT}
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ../../data/airbyte/data
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: ../../data/airbyte/data
+
   db:
     name: ${DB_DOCKER_MOUNT}
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ../../data/airbyte/db
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: ../../data/airbyte/db
 
 configs:
   flags:

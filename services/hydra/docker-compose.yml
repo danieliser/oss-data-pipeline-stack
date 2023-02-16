@@ -30,12 +30,13 @@ volumes:
     # driver: local
     # driver_opts:
     #   type: none
-    #   device: ../data/hydradatabase
+    #   device: ../../data/hydradatabase
     #   o: bind
+
   cloudbeaverdb:
     # uncomment if you want to use a local directory
     # driver: local
     # driver_opts:
     #   type: none
-    #   device: ../data/cloudbeaver
+    #   device: ../../data/cloudbeaver
     #   o: bind
