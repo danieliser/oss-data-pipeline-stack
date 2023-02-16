@@ -7,5 +7,5 @@ data/**
 
 .env
 commands.log
-docker-compose*.overrides.yml
+docker-compose*.override.yml
 notes.md
