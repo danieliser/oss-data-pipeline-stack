@@ -1,0 +1,4 @@
+.env
+commands.log
+docker-compose*.overrides.yml
+notes.md
