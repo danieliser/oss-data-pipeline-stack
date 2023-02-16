@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../bin/inquiry.sh
+source ../../bin/inquiry.sh
 
 # Define the log file path
 LOG_FILE="commands.log"

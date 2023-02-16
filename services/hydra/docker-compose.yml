@@ -11,31 +11,31 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - hydra:/var/lib/postgresql/data
+      - hydradb:/var/lib/postgresql/data
     restart: unless-stopped
 
-  dbeaver:
+  cloudbeaver:
     container_name: dbeaver
     image: dbeaver/cloudbeaver:latest
     ports:
       - ${DBEAVER_PORT}:8978
     volumes:
-      - dbeaver:/opt/cloudbeaver/workspace
+      - cloudbeaverdb:/opt/cloudbeaver/workspace
     restart: unless-stopped
 
 # define volumes
 volumes:
-  hydra:
+  hydradb:
     # uncomment if you want to use a local directory
     # driver: local
     # driver_opts:
     #   type: none
-    #   device: /nfs/data-stack/hydradatabase
+    #   device: ../data/hydradatabase
     #   o: bind
-  dbeaver:
+  cloudbeaverdb:
     # uncomment if you want to use a local directory
     # driver: local
     # driver_opts:
     #   type: none
-    #   device: /nfs/data-stack/cloudbeaver
+    #   device: ../data/cloudbeaver
     #   o: bind
