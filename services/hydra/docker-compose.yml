@@ -6,19 +6,19 @@ services:
     container_name: hydra
     image: ghcr.io/hydradatabase/hydra:latest
     ports:
-      - ${POSTGRES_PORT}:5432
+      - ${POSTGRES_PORT:-5432}:5432
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     volumes:
       - hydradb:/var/lib/postgresql/data
     restart: unless-stopped
 
   cloudbeaver:
-    container_name: dbeaver
+    container_name: cloudbeaver
     image: dbeaver/cloudbeaver:latest
     ports:
-      - ${DBEAVER_PORT}:8978
+      - ${DBEAVER_PORT:-8978}:8978
     volumes:
       - cloudbeaverdb:/opt/cloudbeaver/workspace
     restart: unless-stopped
