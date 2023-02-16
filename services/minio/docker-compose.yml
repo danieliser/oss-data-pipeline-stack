@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  ### MinIO for flow storage
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    entrypoint: ["minio", "server", "--address", "0.0.0.0:9000", "--console-address", "0.0.0.0:9001", "/data"]
+    volumes:
+      - minio:/data
+    ports:
+      - ${MINIO_SERVER_PORT:-9000}:9000
+      - ${MINIO_CONSOLE_PORT:-9001}:9001
+    restart: unless-stopped
+
+volumes:
+  minio:
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: ../../data/minio
+    #   o: bind
