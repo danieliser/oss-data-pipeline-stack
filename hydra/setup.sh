@@ -67,7 +67,7 @@ note="Set up superuser for Postgres database."
 refresh_screen
 
 # Prompt for new superuser name & password
-read -p "Enter a new superuser name: " superuser_name
+text_input "Enter a new superuser name: " superuser_name
 
 # Define a global variable to store the password
 password=""
@@ -132,7 +132,7 @@ while true; do
         note="Set up new database"
         refresh_screen
 
-        read -p "Enter a new database name: " database_name
+        text_input "Enter a new database name: " database_name
         log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"CREATE DATABASE $database_name;\\\"\""
         echo "Created database $database_name"
 
@@ -144,7 +144,7 @@ while true; do
             read -p "Do you need a new schema? (y/n) " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
-                read -p "Enter a new schema name: " schema_name
+                text_input "Enter a new schema name: " schema_name
                 log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d $database_name -c \\\"CREATE SCHEMA $schema_name;\\\"\""
                 echo "Created schema $schema_name"
             elif [[ $REPLY =~ ^[Nn]$ ]]; then
@@ -174,8 +174,7 @@ while true; do
     read -p "Do you need to create a new user? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-
-        read -p "Enter a new user name: " user_name
+        text_input "Enter a new user name: " user_name
         get_password
         log_and_execute "docker exec hydra sh -c \"psql -U $db_user -d postgres -c \\\"CREATE USER $user_name WITH PASSWORD '$password';\\\"\""
         echo "Created user $user_name with password *********"
