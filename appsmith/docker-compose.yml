@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  appsmith:
+    image: index.docker.io/appsmith/appsmith-ce
+    container_name: appsmith
+    ports:
+      - ${APPSMITH_HTTP_PORT}:80
+      - ${APPSMITH_HTTPS_PORT}:443
+    volumes:
+      - appsmith:/appsmith-stacks
+    restart: unless-stopped
+    # Uncomment the lines below to enable auto-update
+    # labels:
+    #   com.centurylinklabs.watchtower.enable: "true"
+
+  # auto_update:
+  #   image: containrrr/watchtower
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   # Update check interval in seconds.
+  #   command: --schedule "0 0 * ? * *" --label-enable --cleanup
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - appsmith
+  #   environment:
+  #     - WATCHTOWER_LIFECYCLE_HOOKS=true
+
+volumes:
+  appsmith:
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /nfs/data-stack/appsmith/stacks
+    #   o: bind
