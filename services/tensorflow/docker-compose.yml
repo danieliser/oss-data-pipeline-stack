@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  tensorflow:
+    image: tensorflow/tensorflow:latest-jupyter
+    # uncomment if you want to use gpu tensorflow
+    # image: tensorflow/tensorflow:latest-gpu-jupyter
+    ports:
+      - 8888:8888
+    volumes:
+      - notebooks:/notebooks
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token=''
+
+volumes:
+  notebooks:
+    # uncomment if you want to use a local directory
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: ../../data/notebooks
+    #   o: bind
