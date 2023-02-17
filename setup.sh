@@ -31,8 +31,6 @@ refresh_screen() {
 services=$(find services -mindepth 1 -maxdepth 1 -type d)
 
 for service in $services; do
-  echo $service
-
   if [ -f "$service/.example.env" ]; then
     cp "$service/.example.env" "$service/.env"
   fi
@@ -44,32 +42,33 @@ done
 
 refresh_screen
 
+# Set up some color variables
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+MAGENTA='\033[0;35m'
+RESET='\033[0m'
+UNDERLINE='\033[4m'
+
+# Use color variables to highlight the statements
+echo
+printf "${YELLOW}Modify the ${UNDERLINE}\e[1m.env\e[0m${YELLOW} file in each service folder to configure the services.${RESET}\n"
+echo
+printf "${MAGENTA}If you want to use local or remote storage, you can use \e[1mdocker-compose.override.yml\e[0m${MAGENTA} to override the volume configuration. See \e[1mdocker-compose.yml\e[0m${MAGENTA} for commented examples.${RESET}\n"
+echo
+printf "${GREEN}You can then run ${UNDERLINE}\e[1m./services.sh start\e[0m${GREEN} to start all of the services.${RESET}\n"
+echo
+
 # ask if user wants to start the service accepting only y or n
 while true; do
   read -p "Do you wish to start all services? [y/n] " yn
   case $yn in
   [Yy]*)
-    if [ -f "stack.sh" ]; then
-      bash "stack.sh"
+    if [ -f "services.sh" ]; then
+      bash "services.sh"
     fi
     break
     ;;
   [Nn]*)
-    # Set up some color variables
-    GREEN='\033[0;32m'
-    YELLOW='\033[0;33m'
-    MAGENTA='\033[0;35m'
-    RESET='\033[0m'
-    UNDERLINE='\033[4m'
-
-    # Use color variables to highlight the statements
-    echo
-    printf "${YELLOW}Modify the ${UNDERLINE}\e[1m.env\e[0m${YELLOW} file in each service folder to configure the services.${RESET}\n"
-    echo
-    printf "${MAGENTA}If you want to use local or remote storage, you can use \e[1mdocker-compose.override.yml\e[0m${MAGENTA} to override the volume configuration. See \e[1mdocker-compose.yml\e[0m${MAGENTA} for commented examples.${RESET}\n"
-    echo
-    printf "${GREEN}You can then run ${UNDERLINE}\e[1m./services.sh start\e[0m${GREEN} to start all of the services.${RESET}\n"
-    echo
     break
     ;;
   *) echo "Please answer yes or no." ;;

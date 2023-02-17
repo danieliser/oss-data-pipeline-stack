@@ -42,6 +42,9 @@ refresh_screen
 # Start the hydra container.
 log_and_execute "docker-compose -f ./docker-compose.yml up -d"
 
+echo "Waiting for containers to start up..."
+sleep 5  # Wait for 10 seconds to allow the containers to start up
+
 root_user="postgres"
 
 # Use a loop to wait for the hydra container to be ready.
@@ -232,7 +235,8 @@ while true; do
     fi
 done
 
+# Start the hydra container.
+log_and_execute "docker-compose -f ./docker-compose.yml down"
+
 note="Hydra is ready to go!"
 refresh_screen
-
-exit
