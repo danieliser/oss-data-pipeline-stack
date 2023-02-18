@@ -19,6 +19,7 @@ cd oss-data-pipeline-stack
 ## Accessing the tools
 
 ### Web UI
+- [Appsmith](https://localhost:8082)
 - [Airbyte](https://localhost:8000)
 - [Minio(S3 Block Storage)](https://localhost:9000)
 - [DBeaver](https://localhost:8978)
@@ -27,3 +28,20 @@ cd oss-data-pipeline-stack
 ### Services
 - [Hydra(Postgres DB)](https://localhost:5432)
 - [Minio(S3 Block Storage)](https://localhost:9001)
+
+
+## Still to do
+
+- [ ] Add Prefect2
+- [ ] Add Airflow
+- [ ] Add dbt
+- [ ] Add MetaBase
+- [ ] Add superset
+- [ ] Add PowerBI
+- [ ] Add Looker
+- [ ] Add Redash
+- [ ] Add RStudio
+- [ ] Add DVC
+- [ ] Add MLFlow
+- [ ] Add Streamlit
+- [ ] Add kubeflow
